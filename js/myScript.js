@@ -1,25 +1,38 @@
-const countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
 var slider = document.getElementById("myRange");
 var output = document.getElementById("value");
 
-const x = setInterval(function () {
+// Set the date we're counting down to
+var countDownDate = new Date("Jul 5, 2057 15:37:25").getTime();
 
-  const now = new Date().getTime();
-  const distance = countDownDate - now;
+// Update the count down every 1 second
+var x = setInterval(function () {
+  // Get today's date and time
+  var now = new Date().getTime();
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const secs = Math.floor((distance % (1000 * 60)) / 1000);
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
 
-  document.getElementById("countdownTimer").innerHTML = days + " : " + hours + " : "
-    + mins + " : " + secs;
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+  // Display the result in the element with id="demo"
+  document.getElementById("countdownTimer").innerHTML =
+    days +
+    " Days " +
+    hours +
+    " Hours " +
+    minutes +
+    " Minutes " +
+    seconds +
+    " Seconds ";
+
+  // If the count down is finished, write some text
   if (distance < 0) {
-    document.getElementById("countdownTimer").innerHTML = days + " : " + hours + " : "
-      + mins + " : " + secs;
-    /* clearInterval(x);
-    document.getElementById("countdownTimer").innerHTML = "EXPIRED"; */
+    clearInterval(x);
+    document.getElementById("countdownTimer").innerHTML = "EXPIRED";
   }
 }, 1000);
 
@@ -27,4 +40,4 @@ output.innerHTML = slider.value;
 
 slider.oninput = function () {
   output.innerHTML = this.value;
-}
+};
